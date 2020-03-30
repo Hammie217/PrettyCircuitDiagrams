@@ -11,10 +11,12 @@ var carrying=2;
 var currentRatio=1;
 var currentRotation=1/2;
 
+var rect = c.getBoundingClientRect();
+
 var imgTag1 = new Image();
-imgTag1.src = "no4.png";   // load image
+imgTag1.src = "../assets/no4.png";   // load image
 var imgTag2 = new Image();
-imgTag2.src = "co.png";   // load image
+imgTag2.src = "../assets/co.png";   // load image
 
 var s1 =[{}];
 var s1Count=0;
@@ -43,8 +45,8 @@ function sizexl(event){currentRatio=1.66;}
 function onmove(event){
   if(carrying!=0){
     ctx.clearRect(0, 0, c.width, c.height); 
-    var x =(event.clientX*5)+(25-((event.clientX*5)%25))-0;
-    var y =(event.clientY*5)+(25-((event.clientY*5)%25))-0;
+    var x =(event.clientX*5)+(25-((event.clientX*5)%25))-rect.left;
+    var y =(event.clientY*5)+(25-((event.clientY*5)%25))-rect.top;
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(3.14*currentRotation);
@@ -78,8 +80,8 @@ function renderFromStores(){
 }
 
 function onLeftDown(event){
-    var xVal =(event.clientX*5)+(25-((event.clientX*5)%25))-0;
-    var yVal =(event.clientY*5)+(25-((event.clientY*5)%25))-0;
+    var xVal =(event.clientX*5)+(25-((event.clientX*5)%25))-rect.left;
+    var yVal =(event.clientY*5)+(25-((event.clientY*5)%25))-rect.top;
     if(carrying!=0){
           s1.push({
             name: carrying,
@@ -96,5 +98,22 @@ function onLeftDown(event){
   }
 }
 
+function onKeyboardPress(event){
+  switch(event.keyCode){
+    case 82://R key
+      currentRotation+=1/2;
+      break;
+    case 67://R key
+      carrying=2;
+      break;
+    case 78://R key
+      carrying=1;
+      break;
+    default:
+      break;
+  }
+}
+
 window.addEventListener("mousemove", onmove)   // We try to pick an object   var pickResult = scene.pick(scene.pointerX, scene.pointerY);});
 c.addEventListener("mousedown", onLeftDown)
+window.addEventListener("keydown", onKeyboardPress)
