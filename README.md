@@ -1,6 +1,6 @@
 <p align="center">
   <h1>PrettyCircuitDiagrams</h1>
   <br><br>
-  <img src="website/assets/logo.png">
+  <img src="website/assets/Logo.png">
 </p>
 
